@@ -59,7 +59,7 @@ sudo systemctl start vxserverprometheusgrafana.service
 ## 專案目錄結構範例
 
 ```
-vxserverprometheusgrafana/
+docker_sflow-rt_grafana_pormetheus/
 ├─ docker-compose.yml
 ├─ readme.md
 ├─ volumes/
