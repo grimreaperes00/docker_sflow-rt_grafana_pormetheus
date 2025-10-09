@@ -53,3 +53,24 @@ sudo systemctl start vxserverprometheusgrafana.service
 
 ---
 如需更多 Grafana/Prometheus/sFlow-RT 設定，請參考各自官方文件。
+
+---
+
+## 專案目錄結構範例
+
+```
+vxserverprometheusgrafana/
+├─ docker-compose.yml
+├─ readme.md
+├─ volumes/
+│  ├─ prometheus-data/           # Prometheus 資料目錄
+│  ├─ prometheus-config/
+│  │  └─ prometheus.yml          # Prometheus 設定檔
+│  ├─ grafana-data/              # Grafana 資料目錄
+│  └─ grafana.deb  # 下載的 Grafana deb(如下載下來執行異常，請替換名稱重新執行)
+├─ sflow-rt/
+│  └─ flows.js                   # sFlow-RT flows 設定
+└─ ...（其他檔案/資料夾）
+```
+
+> 若有檔案遺漏或結構不同，請依此架構調整，確保服務能正確運作。
