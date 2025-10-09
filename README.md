@@ -68,9 +68,9 @@ docker_sflow-rt_grafana_pormetheus/
 │  │  └─ prometheus.yml          # Prometheus 設定檔
 │  ├─ grafana-data/              # Grafana 資料目錄
 │  └─ grafana.deb  # 下載的 Grafana deb(如下載下來執行異常，請替換名稱重新執行)
-├─ sflow-rt/
-│  └─ flows.js                   # sFlow-RT flows 設定
-└─ ...（其他檔案/資料夾）
+ ─ sflow-rt/
+   └─ flows.js                   # sFlow-RT flows 設定
+
 ```
 
 > 若有檔案遺漏或結構不同，請依此架構調整，確保服務能正確運作。
