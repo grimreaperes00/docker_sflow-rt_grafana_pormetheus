@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  grafana:
+    image: grafana/grafana-oss
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+     - '3000:3000'
+    volumes:
+     - ./volumes:/var/lib/grafana
+    user: "472:472"
+    depends_on:
+      - prometheus
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./volumes/prometheus-data:/prometheus/data
+      - ./volumes/prometheus-config/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus/data"
+      - '--storage.tsdb.retention.time=15d'
+    depends_on:
+      - sflow-rt
+    networks:
+      - monitoring
+
+  sflow-rt:
+    image: sflow/${RT_IMAGE:-prometheus}
+    container_name: sflow-rt
+    user: ${DOCKER_USER}
+    restart: unless-stopped
+    environment:
+      - RTMEM=${RTMEM:-1G}
+      - RTPROP=${RTPROP:-}
+    volumes:
+      - ./sflow-rt/store:/sflow-rt/store
+    ports:
+      - '6343:6343/udp'
+      - '8008:8008'
+    networks:
+      - monitoring
+    
+networks:
+  monitoring:
+    name: monitoring
+    driver: bridge
+
