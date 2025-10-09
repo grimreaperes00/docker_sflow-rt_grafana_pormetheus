@@ -74,3 +74,4 @@ docker_sflow-rt_grafana_pormetheus/
 ```
 
 > 若有檔案遺漏或結構不同，請依此架構調整，確保服務能正確運作。
+## 適用grfana ID:11201、11096
