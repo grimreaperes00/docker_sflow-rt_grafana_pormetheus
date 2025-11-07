@@ -31,10 +31,13 @@ sudo nano /etc/systemd/system/vxserverprometheusgrafana.service
 Description=Grafana + Prometheus + sFlow-RT (vxserverprometheusgrafana)
 Requires=docker.service
 After=docker.service
+#請修改為你的實際路徑
+RequiresMountsFor=/home/vxserver/vxserverprometheusgrafana
 
 [Service]
 Type=oneshot
-WorkingDirectory=/home/vxserver/vxserverprometheusgrafana #請修改為你的實際路徑
+#請修改為你的實際路徑
+WorkingDirectory=/home/vxserver/vxserverprometheusgrafana 
 ExecStart=/usr/bin/docker compose up -d
 ExecStop=/usr/bin/docker compose down
 RemainAfterExit=true
@@ -45,7 +48,6 @@ WantedBy=multi-user.target
 
 ## 6. 啟用 systemd 服務並設為開機自動啟動
 ```sh
-sudo systemctl daemon-reexec
 sudo systemctl daemon-reload
 sudo systemctl enable vxserverprometheusgrafana.service
 sudo systemctl start vxserverprometheusgrafana.service
